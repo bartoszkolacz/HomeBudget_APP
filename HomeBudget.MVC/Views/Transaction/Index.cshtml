@@ -1,0 +1,25 @@
+﻿@model IEnumerable<HomeBudget.Application.Transactions.TransactionCommand>
+
+@{
+    ViewData["Title"] = "Transakcje";
+}
+
+<h1>Wszystkie transakcje</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-secondary">Dodaj nową transakcję</a>
+</p>
+
+<div class="row">
+    @foreach (var item in Model) {
+        <div class="card m-3" style="width: 18rem">
+            <div class="card-body">
+                <h5 class="card-title">@item.transactionName</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@item.transactionDescription</h6>
+                <p class="card-text">@item.transactionAmount zł</p>
+                <p href="#" class="btn btn-outline">Edytuj</p>
+                <p href="#" class="btn btn-outline-danger">Usuń</p>
+            </div>
+        </div>
+    }
+</div>

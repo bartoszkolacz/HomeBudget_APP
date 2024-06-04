@@ -1,17 +1,26 @@
-﻿using HomeBudget.Application.Services;
-using HomeBudget.Domain.Interfaces;
+﻿using HomeBudget.Application.Transaction.Commands.CreateTransaction;
+using HomeBudget.Application.Transaction.Queries.GetAllTransactions;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using HomeBudget.Application.Transactions;
+using HomeBudget.Domain.Interfaces;
 
 
 namespace HomeBudget.MVC.Controllers
 {
     public class TransactionController : Controller
     {
-        private readonly ITransactionService _transactionService;
-        public TransactionController(ITransactionService transactionService) 
+        private readonly IMediator _mediator;
+        public TransactionController(IMediator mediator) 
         {
-            _transactionService = transactionService;
-        }  
+            _mediator = mediator;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var transactions = await _mediator.Send(new GetAllTransactionsQuery());
+            return View(transactions);
+        }
 
         public ActionResult Create() 
         {
@@ -19,10 +28,15 @@ namespace HomeBudget.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Domain.Entities.Transaction transaction)
+        public async Task<IActionResult> Create(CreateTransactionCommand command)
         {
-            await _transactionService.Create(transaction);
-            return RedirectToAction(nameof(Create)); //todo: refactor
+            if (!ModelState.IsValid) 
+            {
+                return View(command);
+
+            }
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

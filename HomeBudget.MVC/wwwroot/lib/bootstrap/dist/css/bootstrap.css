@@ -11,7 +11,7 @@
  * Copyright 2011-2024 The Bootstrap Authors
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-@import url("https://fonts.googleapis.com/css2?transaction=Inter:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 :root,
 [data-bs-theme=light] {
   --bs-blue: #3459e6;
@@ -82,7 +82,7 @@
   --bs-font-sans-serif: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-transaction: var(--bs-font-sans-serif);
+  --bs-body-font-family: var(--bs-font-sans-serif);
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
@@ -203,7 +203,7 @@
 
 body {
   margin: 0;
-  font-transaction: var(--bs-body-font-transaction);
+  font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
@@ -373,7 +373,7 @@ pre,
 code,
 kbd,
 samp {
-  font-transaction: var(--bs-font-monospace);
+  font-family: var(--bs-font-monospace);
   font-size: 1em;
 }
 
@@ -467,7 +467,7 @@ select,
 optgroup,
 textarea {
   margin: 0;
-  font-transaction: inherit;
+  font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
@@ -2993,7 +2993,7 @@ textarea.form-control-lg {
 .btn {
   --bs-btn-padding-x: 1rem;
   --bs-btn-padding-y: 0.5rem;
-  --bs-btn-font-transaction: ;
+  --bs-btn-font-family: ;
   --bs-btn-font-size: 0.875rem;
   --bs-btn-font-weight: 500;
   --bs-btn-line-height: 1.5;
@@ -3008,7 +3008,7 @@ textarea.form-control-lg {
   --bs-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--bs-btn-focus-shadow-rgb), .5);
   display: inline-block;
   padding: var(--bs-btn-padding-y) var(--bs-btn-padding-x);
-  font-transaction: var(--bs-btn-font-transaction);
+  font-family: var(--bs-btn-font-family);
   font-size: var(--bs-btn-font-size);
   font-weight: var(--bs-btn-font-weight);
   line-height: var(--bs-btn-line-height);
@@ -5814,7 +5814,7 @@ textarea.form-control-lg {
   z-index: var(--bs-tooltip-zindex);
   display: block;
   margin: var(--bs-tooltip-margin);
-  font-transaction: var(--bs-font-sans-serif);
+  font-family: var(--bs-font-sans-serif);
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -5924,7 +5924,7 @@ textarea.form-control-lg {
   z-index: var(--bs-popover-zindex);
   display: block;
   max-width: var(--bs-popover-max-width);
-  font-transaction: var(--bs-font-sans-serif);
+  font-family: var(--bs-font-sans-serif);
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -8414,7 +8414,7 @@ textarea.form-control-lg {
 }
 
 .font-monospace {
-  font-transaction: var(--bs-font-monospace) !important;
+  font-family: var(--bs-font-monospace) !important;
 }
 
 .fs-1 {

@@ -1,5 +1,7 @@
-﻿using HomeBudget.Domain.Interfaces;
+﻿using HomeBudget.Domain.Entities;
+using HomeBudget.Domain.Interfaces;
 using HomeBudget.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +22,10 @@ namespace HomeBudget.Infrastructure.Repositories
             _dbContext.Add(transaction);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Transaction>> GetAll()
+         => await _dbContext.Transactions.ToListAsync();
+        public Task<Domain.Entities.Transaction?> GetByName(string name)
+        => _dbContext.Transactions.FirstOrDefaultAsync(cw => cw.transactionName.ToLower() == name.ToLower());
     }
 }

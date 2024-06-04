@@ -9,5 +9,7 @@ namespace HomeBudget.Domain.Interfaces
     public interface ITransactionRepository
     {
         Task Create(Domain.Entities.Transaction transaction);
+        Task<Domain.Entities.Transaction?> GetByName(string name);
+        Task<IEnumerable<Domain.Entities.Transaction>> GetAll(); 
     }
 }

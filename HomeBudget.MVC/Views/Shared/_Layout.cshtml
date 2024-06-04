@@ -1,5 +1,6 @@
 ﻿@{
-    var currentUrl = ViewContext.RouteData.Values["Action"].ToString();
+    var action = ViewContext.RouteData.Values["Action"]!.ToString();
+    var controller = ViewContext.RouteData.Values["Controller"]!.ToString();
 }
 
 <!DOCTYPE html>
@@ -7,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HomeBudget.MVC</title>
+    <title>@ViewData["Title"] - HomeBudget</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HomeBudget.MVC.styles.css" asp-append-version="true" />
@@ -24,25 +25,22 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark @(currentUrl== "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index"> Dashboard </a>
+                            <a class="nav-link text-dark @(controller == "Home" && action== "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index"> Dashboard </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark @(currentUrl== "Family" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Family"> Rodzina </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark @(currentUrl== "Transactions" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Transactions"> Transakcje </a>
+                            <a class="nav-link text-dark @(controller == "Home" && action== "Family" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Family"> Rodzina </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark @(currentUrl== "Budget" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Budget"> Budżet </a>
+                            <a class="nav-link text-dark @(controller == "Transaction" && action== "Index" ? "active" : "")" asp-area="" asp-controller="Transaction" asp-action="Index"> Transakcje </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark @(currentUrl== "Reports" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Reports"> Raporty </a>
+                            <a class="nav-link text-dark @(controller == "Home" && action== "Budget" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Budget"> Budżet </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark @(currentUrl== "Transactions" ? "active" : "")" asp-area="" asp-controller="Transaction" asp-action="Create"> Dodaj transakcje </a>
+                            <a class="nav-link text-dark @(controller == "Home" && action== "Reports" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Reports"> Raporty </a>
                         </li>
 
                     </ul>
@@ -58,7 +56,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - HomeBudget.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - HomeBudget Merito - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
