@@ -14,5 +14,6 @@ namespace HomeBudget.Application.Transactions
         public float transactionAmount { get; set; }
         public string? transactionCategory { get; set; }
         public string? EncodedName { get; set; }
+        public bool IsEditable { get; set; }
     }
 }

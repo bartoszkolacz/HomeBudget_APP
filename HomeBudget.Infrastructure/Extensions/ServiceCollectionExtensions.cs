@@ -21,12 +21,14 @@ namespace HomeBudget.Infrastructure.Extensions
             services.AddDbContext<HomeBudgetDbContext>(options => options.UseSqlServer(
         configuration.GetConnectionString("HomeBudget"))); //połączenie bazy danych ze ścieżki w appsettings.json
 
-            services.AddDefaultIdentity<IdentityUser>() //identity
-                    .AddEntityFrameworkStores<HomeBudgetDbContext>();   //identity połączenie z bazą
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()                           //identity połączenie rolami 
+                .AddEntityFrameworkStores<HomeBudgetDbContext>();   //identity połączenie z bazą
 
             services.AddScoped<TransactionSeeder>();
 
             services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<ITransactionCategoryRepository, TransactionCategoryRepository>();
         }
     }
 }

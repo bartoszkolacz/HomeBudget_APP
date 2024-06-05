@@ -1,5 +1,7 @@
-﻿using FluentValidation;
+﻿using AutoMapper;
+using FluentValidation;
 using FluentValidation.AspNetCore;
+using HomeBudget.Application.ApplicationUser;
 using HomeBudget.Application.Mappings;
 using HomeBudget.Application.Transaction.Commands.CreateTransaction;
 using HomeBudget.Application.Transaction.Commands.EditTransaction;
@@ -18,9 +20,18 @@ namespace HomeBudget.Application.Extensions
         {
             public static void AddApplication(this IServiceCollection services)
             {
+            services.AddScoped<IUserContext, UserContext>();
             services.AddMediatR(typeof(CreateTransactionCommand));
-            services.AddMediatR(typeof(EditTransactionCommand));
-            services.AddAutoMapper(typeof(TransactionMappingProfile));
+
+            //services.AddMediatR(typeof(EditTransactionCommand));
+            services.AddScoped(provider => new MapperConfiguration(cfg =>
+            {
+                var scope = provider.CreateScope();
+                var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
+                cfg.AddProfile(new TransactionMappingProfile(userContext));
+            }).CreateMapper()
+            ); //mapper odczytuje jaki użytkownik korzysta z apki i sprawdzic czy ma dostep do edycji danego zasobu transactiondto
+
             services.AddValidatorsFromAssemblyContaining<CreateTransactionCommandValidator>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();

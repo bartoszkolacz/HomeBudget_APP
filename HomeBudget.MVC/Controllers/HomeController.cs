@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using HomeBudget.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HomeBudget.MVC.Controllers;
 
@@ -18,20 +19,29 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult NoAccess()
+    {
+        return View();
+    }
+
     public IActionResult Privacy()
     {
         return View();
     }
+
+    [Authorize(Roles = "Parent")]
     public IActionResult Budget()
     {
         return View();
     }
 
+    [Authorize(Roles = "Parent")]
     public IActionResult Reports()
     {
         return View();
     }
 
+    [Authorize(Roles = "Parent")]
     public IActionResult Family()
     {
         return View();

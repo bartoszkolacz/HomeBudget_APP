@@ -4,10 +4,15 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using HomeBudget.Application.Transactions;
 using HomeBudget.Domain.Interfaces;
-using HomeBudget.Application.Transaction.Queries.GetTransactionByEncodedName;
+
 using HomeBudget.Application.Transaction.Commands.EditTransaction;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using HomeBudget.Application.Transaction.Queries.GetTransactionByEncodedName;
+using System.Data;
+using HomeBudget.MVC.Models;
+using Newtonsoft.Json;
+using HomeBudget.MVC.Extensions;
 
 
 namespace HomeBudget.MVC.Controllers
@@ -30,11 +35,6 @@ namespace HomeBudget.MVC.Controllers
 
 
 
-        [Authorize]
-        public IActionResult Create()
-        {
-           return View();
-        }
 
         [Route("Transaction/{encodedName}/Details")]
         public async Task<IActionResult> Details(string encodedName)
@@ -43,19 +43,17 @@ namespace HomeBudget.MVC.Controllers
             return View(dto);
         }
 
-        [Route("Transaction/{encodedName}/Edit")]
-        public async Task<IActionResult> Edit(string encodedName)
+
+
+
+
+
+        //************************ CREATE **********************//
+        [Authorize]
+        public IActionResult Create()
         {
-            var dto = await _mediator.Send(new GetTransactionByEncodedNameQuery(encodedName));
-            EditTransactionCommand model = _mapper.Map<EditTransactionCommand>(dto);
-            return View(dto);
+            return View();
         }
-
-
-
-
-
-
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Create(CreateTransactionCommand command)
@@ -65,11 +63,35 @@ namespace HomeBudget.MVC.Controllers
                 return View(command);
 
             }
-            await _mediator.Send(command);
+            //await _mediator.Send(command);
+
+            this.SetNotification("success", $"Dodano transakcje");
+
             return RedirectToAction(nameof(Index));
         }
 
+
+
+        //************************ EDIT **********************//
+        [Authorize]
+        [Route("Transaction/{encodedName}/Edit")]
+
+        public async Task<IActionResult> Edit(string encodedName)
+        {
+            var dto = await _mediator.Send(new GetTransactionByEncodedNameQuery(encodedName));
+           
+            if (!dto.IsEditable)    //jeśli użytkownik nie ma dostępu do dto, wyrzuca usera do NoAccess w Home
+            {
+                return RedirectToAction("NoAccess", "Home");
+            }
+
+
+            EditTransactionCommand model = _mapper.Map<EditTransactionCommand>(dto);
+            
+            return View(dto);
+        }
         [HttpPost]
+        [Authorize]
         [Route("Transaction/{encodedName}/Edit")]
         public async Task<IActionResult> Edit(string encodedName, EditTransactionCommand command)
         {
@@ -78,6 +100,7 @@ namespace HomeBudget.MVC.Controllers
                 return View(command);
             }
             await _mediator.Send(command);
+            this.SetNotification("info", $"Edytowano transakcje"); //notyfikacja o edycji transakcji
             return RedirectToAction(nameof(Index));
         }
 

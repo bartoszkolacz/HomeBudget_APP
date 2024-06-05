@@ -26,6 +26,9 @@
 <hr />
 
 <div>
-    <a class="btn btn-secondary" asp-action="Edit"> Edytuj transakcję </a>
+    @if (Model.IsEditable)
+    {
+        <a class="btn btn-secondary" asp-controller="Transaction" asp-action="Edit" asp-route-encodedName="@Model.EncodedName"> Edytuj transakcję </a>
+    }
     <a class="btn btn-primary" asp-action="Index"> Wróć do wszystkich transakcji </a>
 </div>
