@@ -2,6 +2,7 @@
 using HomeBudget.Infrastructure.Persistence;
 using HomeBudget.Infrastructure.Repositories;
 using HomeBudget.Infrastructure.Seeders;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,9 @@ namespace HomeBudget.Infrastructure.Extensions
         {
             services.AddDbContext<HomeBudgetDbContext>(options => options.UseSqlServer(
         configuration.GetConnectionString("HomeBudget"))); //połączenie bazy danych ze ścieżki w appsettings.json
+
+            services.AddDefaultIdentity<IdentityUser>() //identity
+                    .AddEntityFrameworkStores<HomeBudgetDbContext>();   //identity połączenie z bazą
 
             services.AddScoped<TransactionSeeder>();
 

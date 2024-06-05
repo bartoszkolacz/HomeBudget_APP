@@ -1,0 +1,31 @@
+﻿@model HomeBudget.Application.Transactions.TransactionDto
+
+@{
+    ViewData["Title"] = "Szczegóły";
+}
+
+<h1>Szczegóły transakcji</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">     Tytuł transakcji    </dt>
+        <dd class = "col-sm-10">    @Html.DisplayFor(model => model.transactionName) </dd>
+
+        <dt class = "col-sm-2">     Kwota transakcji    </dt>
+        <dd class = "col-sm-10">    @Html.DisplayFor(model => model.transactionAmount)  </dd>
+
+        <dt class = "col-sm-2">     Kategoria transakcji    </dt>
+        <dd class = "col-sm-10">    @Html.DisplayFor(model => model.transactionCategory)    </dd>
+
+        <dt class="col-sm-2">     Opis transakcji    </dt>
+        <dd class="col-sm-10">    @Html.DisplayFor(model => model.transactionDescription)    </dd>
+
+    </dl>
+</div>
+<hr />
+
+<div>
+    <a class="btn btn-secondary" asp-action="Edit"> Edytuj transakcję </a>
+    <a class="btn btn-primary" asp-action="Index"> Wróć do wszystkich transakcji </a>
+</div>

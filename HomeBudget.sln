@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBudget.Domain", "HomeBu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBudget.Infrastructure", "HomeBudget.Infrastructure\HomeBudget.Infrastructure.csproj", "{7A50653F-5305-482C-AE7A-CB5C4EB2DA47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeBudget.Application", "HomeBudget.Application\HomeBudget.Application.csproj", "{4970D915-D1EA-4BFA-883A-A5F096ADA95F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBudget.Application", "HomeBudget.Application\HomeBudget.Application.csproj", "{4970D915-D1EA-4BFA-883A-A5F096ADA95F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

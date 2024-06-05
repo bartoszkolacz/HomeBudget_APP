@@ -28,6 +28,7 @@ namespace HomeBudget.Infrastructure.Seeders
                         transactionAmount = 142.21F,
                         transactionCategory = "Transport"
                     };
+                    transaction1.EncodeName();
                     _dbContext.Transactions.Add(transaction1);
                     await _dbContext.SaveChangesAsync();
                 }

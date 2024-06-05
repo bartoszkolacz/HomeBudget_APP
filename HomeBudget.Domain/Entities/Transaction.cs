@@ -14,6 +14,8 @@ namespace HomeBudget.Domain.Entities
         public DateTime transactionCreatedAt { get; set; } = DateTime.UtcNow;
         public float transactionAmount { get; set; }
         public string? transactionCategory { get; set; }
-
+        public string? CreatedById { get; set; }
+        public string EncodedName { get; private set; } = default!;
+        public void EncodeName() => EncodedName = transactionName.ToLower().Replace(" ","-");
     }
 }

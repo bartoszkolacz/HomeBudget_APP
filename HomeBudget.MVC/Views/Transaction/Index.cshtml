@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HomeBudget.Application.Transactions.TransactionCommand>
+﻿@model IEnumerable<HomeBudget.Application.Transactions.TransactionDto>
 
 @{
     ViewData["Title"] = "Transakcje";
@@ -17,8 +17,9 @@
                 <h5 class="card-title">@item.transactionName</h5>
                 <h6 class="card-subtitle mb-2 text-muted">@item.transactionDescription</h6>
                 <p class="card-text">@item.transactionAmount zł</p>
-                <p href="#" class="btn btn-outline">Edytuj</p>
-                <p href="#" class="btn btn-outline-danger">Usuń</p>
+                <a class="btn btn-primary" asp-controller="Transaction" asp-action="Details" asp-route-encodedName="@item.EncodedName">Szczegóły</a>
+                <a class="btn btn-primary" asp-controller="Transaction" asp-action="Edit" asp-route-encodedName="@item.EncodedName">Edytuj</a>
+                <a class="btn btn-outline-danger">Usuń</a>
             </div>
         </div>
     }

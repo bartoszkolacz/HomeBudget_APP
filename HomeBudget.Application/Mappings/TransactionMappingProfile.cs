@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HomeBudget.Application.Transaction.Commands.EditTransaction;
 using HomeBudget.Application.Transactions;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,9 @@ namespace HomeBudget.Application.Mappings
     {
         public TransactionMappingProfile()
         {
-            CreateMap<TransactionCommand, Domain.Entities.Transaction>(); //mapowanie z dto do encji bazodanowej
-            CreateMap<Domain.Entities.Transaction, TransactionCommand>(); //mapowanie z encji bazodanowej do dto
+            CreateMap<TransactionDto, Domain.Entities.Transaction>(); //mapowanie z dto do encji bazodanowej
+            CreateMap<Domain.Entities.Transaction, TransactionDto>(); //mapowanie z encji bazodanowej do dto
+            CreateMap<TransactionDto, EditTransactionCommand>();        //mapowanie z dto na obiekt do edycji
         }
 
     }

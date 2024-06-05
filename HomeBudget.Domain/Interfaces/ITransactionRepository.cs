@@ -11,5 +11,7 @@ namespace HomeBudget.Domain.Interfaces
         Task Create(Domain.Entities.Transaction transaction);
         Task<Domain.Entities.Transaction?> GetByName(string name);
         Task<IEnumerable<Domain.Entities.Transaction>> GetAll(); 
+        Task<Domain.Entities.Transaction> GetByEncodedName(string encodedName);
+        Task Commit();
     }
 }

@@ -2,6 +2,7 @@
 using FluentValidation.AspNetCore;
 using HomeBudget.Application.Mappings;
 using HomeBudget.Application.Transaction.Commands.CreateTransaction;
+using HomeBudget.Application.Transaction.Commands.EditTransaction;
 using HomeBudget.Domain.Interfaces;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,7 @@ namespace HomeBudget.Application.Extensions
             public static void AddApplication(this IServiceCollection services)
             {
             services.AddMediatR(typeof(CreateTransactionCommand));
+            services.AddMediatR(typeof(EditTransactionCommand));
             services.AddAutoMapper(typeof(TransactionMappingProfile));
             services.AddValidatorsFromAssemblyContaining<CreateTransactionCommandValidator>()
                 .AddFluentValidationAutoValidation()

@@ -1,0 +1,43 @@
+﻿@model HomeBudget.Application.Transactions.TransactionDto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edytuj @Model.transactionName </h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="transactionDescription" class="control-label"></label>
+                <input asp-for="transactionDescription" class="form-control" />
+                <span asp-validation-for="transactionDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="transactionAmount" class="control-label"></label>
+                <input asp-for="transactionAmount" class="form-control" />
+                <span asp-validation-for="transactionAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="transactionCategory" class="control-label"></label>
+                <input asp-for="transactionCategory" class="form-control" />
+                <span asp-validation-for="transactionCategory" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success mt-3" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+<div>
+    <a class="btn btn-secondary mb-3"asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

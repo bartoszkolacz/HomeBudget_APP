@@ -6,10 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HomeBudget.Application.Transaction.Commands.CreateTransaction
+namespace HomeBudget.Application.Transaction.Commands.EditTransaction
 {
-    public class CreateTransactionCommand : TransactionDto, IRequest 
+    public class EditTransactionCommand : TransactionDto, IRequest
     {
-
     }
 }
