@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HomeBudget.Application.ApplicationUser;
+using HomeBudget.Application.Transaction.Commands.DeleteTransaction;
 using HomeBudget.Application.Transactions;
 using HomeBudget.Domain.Interfaces;
 using MediatR;
@@ -11,20 +12,20 @@ using System.Threading.Tasks;
 
 namespace HomeBudget.Application.Transaction.Commands.EditTransaction
 {
-    public class EditTransactionCommandHandler : IRequestHandler<EditTransactionCommand>
+    public class DeleteTransactionCommandHandler : IRequestHandler<DeleteTransactionCommand, Unit>
     {
         private readonly ITransactionRepository _transactionRepository;
         private readonly IUserContext _userContext;
 
-        public EditTransactionCommandHandler(ITransactionRepository transactionRepository, IUserContext userContext)
+        public DeleteTransactionCommandHandler(ITransactionRepository transactionRepository, IUserContext userContext)
         {
             _transactionRepository = transactionRepository;
             _userContext = userContext;
         }
 
-        public async Task<Unit> Handle(EditTransactionCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteTransactionCommand request, CancellationToken cancellationToken)
         {
-            var transaction = await _transactionRepository.GetByEncodedName(request.EncodedName!);
+            var transaction = await _transactionRepository.GetByEncodedName(request.EncodedName);
             var user = _userContext.GetCurrentUser();
             var isEditable = user != null && (transaction.CreatedById == user.Id || user.IsInRole("Parent"));
 
@@ -33,12 +34,13 @@ namespace HomeBudget.Application.Transaction.Commands.EditTransaction
                 return Unit.Value;
             }
 
-            transaction.transactionDescription = request.transactionDescription;
-            transaction.transactionCategory = request.transactionCategory;
-            transaction.transactionAmount = request.transactionAmount;
+            await _transactionRepository.Delete(transaction);
+            //await _transactionRepository.Commit();
+
             return Unit.Value;
         }
-
     }
+
+
 }
 

@@ -21,8 +21,8 @@ namespace HomeBudget.Infrastructure.Repositories
 
         public async Task Create(TransactionCategories transactionCategories)
         {
-           // _dbContext.Services.Add(transactionCategories);
-           // await _dbContext.SaveChangesAsync();
+            //_dbContext.Services.Add(transactionCategories);
+            // await _dbContext.SaveChangesAsync();
         }
     }
 

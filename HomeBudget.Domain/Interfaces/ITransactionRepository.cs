@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HomeBudget.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,6 @@ namespace HomeBudget.Domain.Interfaces
         Task<IEnumerable<Domain.Entities.Transaction>> GetAll(); 
         Task<Domain.Entities.Transaction> GetByEncodedName(string encodedName);
         Task Commit();
+        Task Delete(Transaction transaction);
     }
 }

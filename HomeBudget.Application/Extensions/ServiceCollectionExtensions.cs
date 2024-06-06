@@ -4,6 +4,7 @@ using FluentValidation.AspNetCore;
 using HomeBudget.Application.ApplicationUser;
 using HomeBudget.Application.Mappings;
 using HomeBudget.Application.Transaction.Commands.CreateTransaction;
+using HomeBudget.Application.Transaction.Commands.DeleteTransaction;
 using HomeBudget.Application.Transaction.Commands.EditTransaction;
 using HomeBudget.Domain.Interfaces;
 using MediatR;
@@ -22,6 +23,7 @@ namespace HomeBudget.Application.Extensions
             {
             services.AddScoped<IUserContext, UserContext>();
             services.AddMediatR(typeof(CreateTransactionCommand));
+            services.AddMediatR(typeof(DeleteTransactionCommand));
 
             //services.AddMediatR(typeof(EditTransactionCommand));
             services.AddScoped(provider => new MapperConfiguration(cfg =>
@@ -35,7 +37,7 @@ namespace HomeBudget.Application.Extensions
             services.AddValidatorsFromAssemblyContaining<CreateTransactionCommandValidator>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
-            }
+        }
         }
     }
 

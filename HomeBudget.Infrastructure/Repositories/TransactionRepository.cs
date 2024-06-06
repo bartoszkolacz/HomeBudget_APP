@@ -10,15 +10,21 @@ namespace HomeBudget.Infrastructure.Repositories
         private readonly HomeBudgetDbContext _dbContext;
         public TransactionRepository(HomeBudgetDbContext dbContext) 
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext;                                                                           
         }
 
         public Task Commit()
          => _dbContext.SaveChangesAsync();
+      
 
         public async Task Create(Domain.Entities.Transaction transaction)
         {
             _dbContext.Add(transaction);
+            await _dbContext.SaveChangesAsync();
+        }
+        public async Task Delete(Domain.Entities.Transaction transaction)
+        {
+            _dbContext.Remove(transaction);
             await _dbContext.SaveChangesAsync();
         }
 

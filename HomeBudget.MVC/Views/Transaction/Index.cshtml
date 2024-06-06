@@ -21,9 +21,8 @@
                 @if (item.IsEditable)
                 {
                 <a class="btn btn-primary" asp-controller="Transaction" asp-action="Edit" asp-route-encodedName="@item.EncodedName">Edytuj</a>
+                    <a class="btn btn-outline-danger mt-3" asp-controller="Transaction" asp-action="Delete" asp-route-encodedName="@item.EncodedName">Usuń</a>
                 }
-                
-                <br /><a class="btn btn-outline-danger mt-3">Usuń</a>
             </div>
         </div>
     }

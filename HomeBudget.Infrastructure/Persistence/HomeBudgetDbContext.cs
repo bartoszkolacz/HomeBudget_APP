@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using HomeBudget.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using static HomeBudget.Application.ApplicationUser.UserContext;
 
 namespace HomeBudget.Infrastructure.Persistence
 {
@@ -19,5 +21,7 @@ namespace HomeBudget.Infrastructure.Persistence
                     .WithOne(s => s.Transaction)            //relacja bazodanowa, -> ma dokładnie jedno
                     .HasForeignKey(s => s.transactionId);   //relacja bazodanowa, -> definiowanie klucz obcy
         }
+        
+        
     }
 }

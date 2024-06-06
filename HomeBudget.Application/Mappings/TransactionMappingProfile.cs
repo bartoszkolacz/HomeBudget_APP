@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HomeBudget.Application.ApplicationUser;
+using HomeBudget.Application.Transaction.Commands.DeleteTransaction;
 using HomeBudget.Application.Transaction.Commands.EditTransaction;
 using HomeBudget.Application.TransactionCategory;
 using HomeBudget.Application.Transactions;
@@ -18,6 +19,7 @@ namespace HomeBudget.Application.Mappings
             var user = userContext.GetCurrentUser();
             CreateMap<TransactionDto, EditTransactionCommand>();      //mapowanie z dto na obiekt do edycji
             CreateMap<TransactionDto, Domain.Entities.Transaction>(); //mapowanie z dto do encji bazodanowej
+            CreateMap<TransactionDto, DeleteTransactionCommand>();
             CreateMap<Domain.Entities.Transaction, TransactionDto>()
                 .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user != null
                                             && (src.CreatedById == user.Id || user.IsInRole("Parent")))); //mapowanie z encji bazodanowej do dto

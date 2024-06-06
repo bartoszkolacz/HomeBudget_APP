@@ -13,6 +13,7 @@ using System.Data;
 using HomeBudget.MVC.Models;
 using Newtonsoft.Json;
 using HomeBudget.MVC.Extensions;
+using HomeBudget.Application.Transaction.Commands.DeleteTransaction;
 
 
 namespace HomeBudget.MVC.Controllers
@@ -104,7 +105,36 @@ namespace HomeBudget.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //************************ DELETE **********************//
+        [Authorize]
+        [Route("Transaction/{encodedName}/Delete")]
+        public async Task<IActionResult> Delete(string encodedName)
+        {
+            var dto = await _mediator.Send(new GetTransactionByEncodedNameQuery(encodedName));
 
+            if (!dto.IsEditable)    // if the user does not have access to dto, redirect to NoAccess in Home
+            {
+                return RedirectToAction("NoAccess", "Home");
+            }
+
+            DeleteTransactionCommand model = _mapper.Map<DeleteTransactionCommand>(dto);
+            return View(model); // Show a confirmation view before deletion
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("Transaction/{encodedName}/Delete")]
+        public async Task<IActionResult> Delete(string encodedName, DeleteTransactionCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+
+            await _mediator.Send(command);
+            this.SetNotification("info", "Transaction deleted successfully"); // Notification about transaction deletion
+            return RedirectToAction(nameof(Index));
+        }
 
 
 
