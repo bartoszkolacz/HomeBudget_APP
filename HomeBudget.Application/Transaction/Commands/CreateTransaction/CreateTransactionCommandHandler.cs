@@ -26,7 +26,7 @@ namespace HomeBudget.Application.Transaction.Commands.CreateTransaction
         public async Task<Unit> Handle(CreateTransactionCommand request, CancellationToken cancellationToken)
         {
             var currentUser = _userContext.GetCurrentUser();
-            if (currentUser == null || !currentUser.IsInRole("Owner")) 
+            if (currentUser == null /*|| !currentUser.IsInRole("Owner")*/) 
             {
                 return Unit.Value;
             }

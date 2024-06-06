@@ -1,22 +1,40 @@
-using System.Diagnostics;
+using HomeBudget.Application.Transaction.Commands.CreateTransaction;
+using HomeBudget.Application.Transaction.Queries.GetAllTransactions;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using HomeBudget.MVC.Models;
+using HomeBudget.Application.Transactions;
+using HomeBudget.Domain.Interfaces;
+
+using HomeBudget.Application.Transaction.Commands.EditTransaction;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using HomeBudget.Application.Transaction.Queries.GetTransactionByEncodedName;
+using System.Data;
+using HomeBudget.MVC.Models;
+using Newtonsoft.Json;
+using HomeBudget.MVC.Extensions;
+using System.Diagnostics;
 
 namespace HomeBudget.MVC.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    //private readonly ILogger<HomeController> _logger;
+    private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(/*ILogger<HomeController> logger,*/ IMediator mediator, IMapper mapper)
     {
-        _logger = logger;
+        //_logger = logger;
+        _mediator = mediator;
+        _mapper = mapper;
     }
 
-    public IActionResult Index()
+    [Authorize]
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var transactions = await _mediator.Send(new GetAllTransactionsQuery());
+        return View(transactions);
     }
 
     public IActionResult NoAccess()
@@ -46,7 +64,7 @@ public class HomeController : Controller
     {
         return View();
     }
-
+    
     public IActionResult Transactions()
     {
         return View();

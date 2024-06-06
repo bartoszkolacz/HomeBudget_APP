@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeBudget.Infrastructure.Migrations
 {
     [DbContext(typeof(HomeBudgetDbContext))]
-    [Migration("20240605185158_CategoriesAddedw")]
-    partial class CategoriesAddedw
+    [Migration("20240606065555_InitCreatedBy")]
+    partial class InitCreatedBy
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -26,7 +26,7 @@ namespace HomeBudget.MVC.Controllers
             _mediator = mediator;
             _mapper = mapper;
         }
-
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var transactions = await _mediator.Send(new GetAllTransactionsQuery());
@@ -35,7 +35,7 @@ namespace HomeBudget.MVC.Controllers
 
 
 
-
+        [Authorize]
         [Route("Transaction/{encodedName}/Details")]
         public async Task<IActionResult> Details(string encodedName)
         {
@@ -63,7 +63,7 @@ namespace HomeBudget.MVC.Controllers
                 return View(command);
 
             }
-            //await _mediator.Send(command);
+            await _mediator.Send(command);
 
             this.SetNotification("success", $"Dodano transakcje");
 

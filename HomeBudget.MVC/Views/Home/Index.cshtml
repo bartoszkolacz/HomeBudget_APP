@@ -1,5 +1,41 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="alert alert-danger"> Tutaj będą pokazane ostatnie transakcje, suma wydatków z miesiąca </div>
+<div class="row">
+
+        <input class="form-control mb-3" id="myInput" type="text" placeholder="Szukaj...">
+      
+    @foreach (var item in Model)
+    {
+        <div class="list-group m-1" id="myList">
+            <a href="#"  class="list-group-item list-group-item-action flex-column align-items-start active">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><b>@item.transactionName</b> </h5>
+                    <small>Utworzono <b>@item.transactionCreatedAt</b> </small>
+                </div>
+                <hr />
+                <small> <i> @item.transactionCategory </i>   </small>
+                <p class="mb-1">Kwota: <b>@item.transactionAmount </b>zł</p>
+                <p class="mb-1"> @item.transactionDescription  </p>
+            </a>
+        </div>
+        <br />
+    }
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("transactionName").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
