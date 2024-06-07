@@ -27,7 +27,7 @@ namespace HomeBudget.MVC.Controllers
             _mediator = mediator;
             _mapper = mapper;
         }
-        [Authorize]
+        [Authorize(Roles = "Parent")]
         public async Task<IActionResult> Index()
         {
             var transactions = await _mediator.Send(new GetAllTransactionsQuery());
@@ -106,7 +106,7 @@ namespace HomeBudget.MVC.Controllers
         }
 
         //************************ DELETE **********************//
-        [Authorize]
+        [Authorize(Roles = "Parent")]
         [Route("Transaction/{encodedName}/Delete")]
         public async Task<IActionResult> Delete(string encodedName)
         {
